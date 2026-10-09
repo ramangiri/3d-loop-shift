@@ -11,3 +11,5 @@
   .shift svg{display:none}.shift>span{font-size:23px}.shift small{font-size:8px;margin-top:4px}
   .footer-meta{margin-top:8px}.footer-meta button{padding:7px}
 }
+
+#mode-link{color:#c1e884;text-decoration:none;font-size:10px;letter-spacing:0;padding:8px 3px;display:inline-block}#mode-link:hover{text-decoration:underline}
