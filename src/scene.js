@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { frameBoard } from './camera-fit.js';
 
 const TAU = Math.PI * 2;
 const TRACK_WIDTH = 1.25;
@@ -405,17 +406,7 @@ export function createScene(canvas) {
   }
 
   function fitCamera() {
-    camera.aspect = width / height;
-    const tangent = Math.tan(THREE.MathUtils.degToRad(camera.fov * 0.5));
-    const fitRadius = outerRadius + 0.38;
-    const usableHeight = THREE.MathUtils.clamp((height - 265) / height, 0.57, 0.79);
-    const distance = Math.max(fitRadius / (tangent * camera.aspect * 0.93), (fitRadius * 0.88 + 0.48) / (tangent * usableHeight));
-    const direction = new THREE.Vector3(0, 1, 0.56).normalize();
-    camera.position.copy(direction.multiplyScalar(distance));
-    camera.lookAt(0, -0.02, 0);
-    camera.near = Math.max(0.1, distance - outerRadius * 2.5);
-    camera.far = distance + 120;
-    camera.updateProjectionMatrix();
+    frameBoard(camera, width, height, outerRadius);
   }
 
   function resize() {
