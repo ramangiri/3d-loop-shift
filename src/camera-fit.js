@@ -12,7 +12,10 @@ export function frameBoard(camera, width, height, outerRadius) {
     top: 1 - 2 * Math.min(top, height * .20) / height,
     bottom: -1 + 2 * Math.min(bottom, height * .23) / height,
   };
-  const direction = new THREE.Vector3(0, 1, .43).normalize();
+  // A steep overhead view wastes the sides of a laptop screen. The desktop
+  // camera moves down and closer, giving a broad oblique view of the same arena.
+  // Portrait keeps the reference's overhead composition. Neither camera rotates.
+  const direction = new THREE.Vector3(0, 1, landscape ? 1.55 : .43).normalize();
   const samples = [];
   for (let i = 0; i < 128; i++) {
     const angle = i / 128 * Math.PI * 2;

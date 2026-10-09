@@ -17,5 +17,11 @@ for(const [width,height] of [[390,844],[430,932],[768,1024],[1180,760],[1440,900
    minX=Math.min(minX,p.x);maxX=Math.max(maxX,p.x);minY=Math.min(minY,p.y);maxY=Math.max(maxY,p.y);
   }
   assert(Math.max((maxX-minX)/(bounds.right-bounds.left),(maxY-minY)/(bounds.top-bounds.bottom))>.90,'board should fill play area');
+  if(width/height>1.05&&height>=700){
+   assert((maxX-minX)/2>.68,'desktop arena must fill substantially more than half the screen width');
+   const tangent=Math.tan(38*Math.PI/360);
+   const previousDistance=Math.max((outer+.38)/(tangent*width/height*.93),((outer+.38)*.88+.48)/(tangent*THREE.MathUtils.clamp((height-265)/height,.57,.79)));
+   assert(camera.position.length()<previousDistance*.75,'desktop camera must be materially closer, not another small zoom adjustment');
+  }
  });
 }
